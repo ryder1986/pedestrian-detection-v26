@@ -22,6 +22,7 @@ class VideoWidget : public QOpenGLWidget
     QList <QRect> rcts;
     void *init_data;
     void *extra_data;
+
 public:
     void set_init_data(void *d)
     {
@@ -87,7 +88,7 @@ protected:
             QPainter painter(this);
             paint_layout1(painter);
             paint_layout2(painter);
-            paint_layout4(painter);
+       //     paint_layout4(painter);
                   }else{
             //prt(info,"invalid frame");
         }

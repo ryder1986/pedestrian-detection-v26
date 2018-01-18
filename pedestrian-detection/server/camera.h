@@ -185,94 +185,11 @@ public:
     {
         return cameras.size();
     }
-
-//    bool try_get_data(int index,QByteArray &ba)
-//    {
-//        bool ret=false;
-//        if(index<0)
-//            return false;
-//        cfg_lock.lock();
-//        ba=cameras[index]->get_rst();
-//        if(ba.length()){
-//            ret= true;
-//            prt(debug,"sending cam %d rst",index);
-//        }else{
-//            ret= false;
-//            prt(warning,"sending cam %d rst error",index);
-//        }
-//        cfg_lock.unlock();
-//        return ret;
-//    }
-
-    void test()
-    {
-        test_int=123;
-    }
-    void prt_test()
-    {
-        prt(info,"%d",test_int);
-    }
-
     ~CameraManager()
     {
         //        stop_all();
         //        delete p_cfg;
-
     }
-    //    int handle_cmd(char *src_buf,char*dst_buf,int size)
-    //    {
-    //        prt(info,"handle client cmd");
-    //        int client_cmd=Protocol::get_operation(src_buf);
-    //        int pkg_len=Protocol::get_length(src_buf);
-    //        int cam_index=Protocol::get_cam_index(src_buf);
-
-    //        QByteArray bta;
-    //        int ret_size=0;
-    //        switch (client_cmd) {
-    //        case Protocol::ADD_CAMERA:
-    //            prt(info,"add camera");
-    //            bta.clear();
-    //            bta.append(src_buf+Protocol::HEAD_LENGTH,pkg_len);
-    //            add_camera(bta.data());
-    //            memcpy(dst_buf,src_buf,size);
-    //            ret_size= Protocol::HEAD_LENGTH;
-    //            break;
-    //        case  Protocol::GET_CONFIG:
-    //            prt(info,"get cfg");
-    //            memcpy(dst_buf,src_buf,Protocol::HEAD_LENGTH);
-    //            memcpy(dst_buf+Protocol::HEAD_LENGTH,p_cfg->get_config().data(),p_cfg->get_config().size());
-    //            ret_size=p_cfg->get_config().size()+Protocol::HEAD_LENGTH;
-    //            break;
-    //        case Protocol::DEL_CAMERA:
-    //            prt(info,"del cam %d ",cam_index);
-    //            del_camera(cam_index);
-    //            memcpy(dst_buf,src_buf,Protocol::HEAD_LENGTH);
-    //            ret_size= Protocol::HEAD_LENGTH;
-    //            break;
-    //        case Protocol::MOD_CAMERA:
-    //            prt(info,"modify cam %d ",cam_index);
-    //            break;
-    //        case Protocol::CAM_OUTPUT_OPEN:
-    //            prt(info,"open cam %d output",cam_index);
-    //            memcpy(dst_buf,src_buf,Protocol::HEAD_LENGTH);
-    //            ret_size= Protocol::HEAD_LENGTH;
-    //            {
-    //                int i=0;
-    //                foreach (Camera *p_c, cameras) {
-    //                    if(i==cam_index)
-    //                        p_c->set_output(true,i);
-    //                    else
-    //                        p_c->set_output(false,i);
-    //                    i++;
-    //                }
-
-    //            }
-    //            break;
-    //        default:
-    //            break;
-    //        }
-    //        return ret_size;
-    //    }
 
     void start_all()
     {
@@ -281,6 +198,7 @@ public:
             cameras.push_back(c);
         }
     }
+
     void stop_all()
     {
         foreach (Camera *tmp, cameras) {
@@ -288,18 +206,7 @@ public:
             cameras.removeOne(tmp);
         }
     }
-    /*    void set_output(int index)
-    {
-        int i=0;
-        foreach (Camera *p_c, cameras) {
-            if(i==index)
-                p_c->set_output(true,i);
-            else
-                p_c->set_output(false,i);
-            i++;
-        }
 
-    }*/
     void add_camera(const char *cfg_buf)
     {
         cfg_lock.lock();
